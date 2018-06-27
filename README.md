@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="">
-  	<img src="https://img.shields.io/badge/Build-passing-blue.svg" height=30/>
+  	<img src="https://img.shields.io/badge/Build-passing-blue.svg" height=25/>
   </a>
   <a href="https://github.com/riccardo-nigrelli/Interpolation/releases">
-    <img src="https://img.shields.io/badge/Version-v0.1-e60026.svg" height=30/>
+    <img src="https://img.shields.io/badge/Version-v0.1-e60026.svg" height=25/>
   </a>
 </p>
 
