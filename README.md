@@ -1,7 +1,12 @@
 ﻿<h2 align="center"> PACKAGE PER L'INTERPOLAZIONE DELLA FUNZIONE ln(x + 1) + cos(x - 1) </h2>
 
 <p align="center">
-  <img src="https://camo.githubusercontent.com/a47a8f66fe9b2e73f4e364ac938060c825dc66fb/68747470733a2f2f73656d6170686f72656170702e636f6d2f6170692f76312f70726f6a656374732f64346363613530362d393962652d343464322d623139652d3137366633366563386366312f3132383530352f62616467652e737667" alt="Build Status" data-canonical-src="https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/badge.svg" style="max-width:100%;">
+  <a href="">
+  	<img src="https://img.shields.io/badge/Build-passing-blue.svg" height=30/>
+  </a>
+  <a href="https://github.com/riccardo-nigrelli/Interpolation/releases">
+    <img src="https://img.shields.io/badge/Version-v0.1-e60026.svg" height=30/>
+  </a>
 </p>
 
 Attraverso questo package do la possibilità all'utente di interpolare la funzione `ln(x + 1) + cos(x - 1)` attraverso il polinomio di Lagrange e il polinomio di Chebyshev con rappresentazione grafica di entrambi i metodi. Inoltre è possibile mettere a confronto i risultati delle due interpolazioni in un un unico grafico in modo da vedere quale tra i due metodi approssima meglio la funzione di partenza.
