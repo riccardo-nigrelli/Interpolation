@@ -208,7 +208,13 @@ int main(void){
  */
 void main_menu(){
 
-    system("clear");
+    #if defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+        system("clear");
+    #endif
+    
+    #if defined(_WIN32) || defined(_WIN36)
+        system("clc");
+    #endif
     
     printf("PROGRAMMA PER L'INTERPOLAZIONE DELLA FUNZIONE ln(x + 1) + cos(x - 1)\n\n");
 
@@ -225,7 +231,14 @@ void main_menu(){
  */
 void lagrange_polynomial(){
 
-    system("clear");
+
+    #if defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+        system("clear");
+    #endif
+    
+    #if defined(_WIN32) || defined(_WIN36)
+        system("clc");
+    #endif
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI LAGRANGE\n\n");
 
@@ -294,7 +307,13 @@ void lagrange_polynomial(){
 
 void chebyshev_polynomial(){
 
-    system("clear");
+    #if defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+        system("clear");
+    #endif
+    
+    #if defined(_WIN32) || defined(_WIN36)
+        system("clc");
+    #endif
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI CHEBYSHEV\n\n");
 
@@ -371,7 +390,13 @@ void chebyshev_polynomial(){
 
 void comparation_methods(){
 
-    system("clear");
+    #if defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+        system("clear");
+    #endif
+    
+    #if defined(_WIN32) || defined(_WIN36)
+        system("clc");
+    #endif
     
     printf("\nCONFRONTE DEI DUE METODI DI INTERPOLAZIONE\n\n");    
 
