@@ -1,28 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <upo/lagrange.h>
+#include <upo/chebyshev.h>
+#include <upo/auxiliary_function.h>
 
 #define GRADE 6
 
 #define LOWER_BOUND 0
 #define UPPER_BOUND 6
-#define STEPS       1000
+#define STEPS_PLOT 1000
+#define COMMANDS 2
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m" 
 #define BOLD    "\033[1m"
 
-char *separator = "";
-/*double x_node_lagrange[GRADE + 1], x_val_lagrange[GRADE], y_node_lagrange[GRADE + 1];
-double *poly_lagrange, *err_lagrange; */
+const char *separator = "";
 
 int i, j;
-double *x_plot, *polynomial;
-double x_node[] = {0, 1, 2, 3, 4, 5, 6};
+double x_node[GRADE + 1], x_val[GRADE], y_node[GRADE + 1], y_plot[STEPS_PLOT], y_node_chebyshev[GRADE + 1];
+double *x_plot, *polynomial, *err, *polynomial_to_plot, *err_to_plot;
+double *coefficients_chebyshev, *polynomial_chebyshev, *result_chebyshev, *polynomial_to_plot_chebyshev, *err_to_plot_chebyshev;
 
-static void main_menu();
-static void lagrange_polynomial();
-/*static void chebyshev_polynomial(); */
+void main_menu();
+void lagrange_polynomial();
+void chebyshev_polynomial();
+void comparation_methods();
 
 int main(void){
 
@@ -39,7 +42,7 @@ int main(void){
             printf(BOLD RED "\nERRORE! " RESET);
             printf("Premere invio per riprovare...");
             getchar();
-            fflush(NULL); 
+            fflush(stdin); 
             main_menu();
             scanf("%u", &choice);
             getchar();
@@ -48,7 +51,7 @@ int main(void){
         switch(choice){
             case 1:
                 lagrange_polynomial();
-                /*write_data_on_file_lagrange(x_node_lagrange, y_node_lagrange, x_val_lagrange, poly_lagrange, err_lagrange); */
+                plot_graph(x_plot, y_plot, polynomial_to_plot, err_to_plot, STEPS_PLOT, COMMANDS); 
                 scanf("%u", &choice);
                 getchar();
 
@@ -61,27 +64,37 @@ int main(void){
                     scanf("%u", &choice);
                     getchar();
 
-                    /*free(poly_lagrange);
-                    free(err_lagrange);*/
+                    free(x_plot);
+                    free(polynomial);
+                    free(err);
+                    free(polynomial_to_plot);
+                    free(err_to_plot);
                 }
                 
                 switch(choice){
                     case 1:
                         exit = 2;
-                        /*free(poly_lagrange);
-                        free(err_lagrange);*/
+                        free(x_plot);
+                        free(polynomial);
+                        free(err);
+                        free(polynomial_to_plot);
+                        free(err_to_plot);
                         break;
                     case 2:
                         exit = 1;
-                        /*free(poly_lagrange);
-                        free(err_lagrange);*/
+                        free(x_plot);
+                        free(polynomial);
+                        free(err);
+                        free(polynomial_to_plot);
+                        free(err_to_plot);
                         break;
                 }
 
                 break;
                 
             case 2:
-                /*chebyshev_polynomial();*/
+                chebyshev_polynomial();
+                plot_graph_chebyshev(x_plot, y_plot, polynomial_to_plot, err_to_plot, STEPS_PLOT, COMMANDS);
                 scanf("%u", &choice);
                 getchar();
 
@@ -90,29 +103,94 @@ int main(void){
                     printf("Premere invio per riprovare...");
                     getchar();
                     fflush(stdin);
-                    /*chebyshev_polynomial();*/
+                    chebyshev_polynomial();
                     scanf("%u", &choice);
                     getchar();
 
-                    /*fare la free degli array*/
+                    free(x_plot);
+                    free(polynomial_to_plot_chebyshev);
+                    free(err_to_plot_chebyshev);
+                    free(coefficients_chebyshev);
+                    free(polynomial_chebyshev);
+                    free(result_chebyshev);
                 }
                 
                 switch(choice){
                     case 1:
                         exit = 2;
-                        /*fare la free degli array*/
+
+                        free(x_plot);
+                        free(polynomial_to_plot_chebyshev);
+                        free(err_to_plot_chebyshev);
+                        free(coefficients_chebyshev);
+                        free(polynomial_chebyshev);
+                        free(result_chebyshev);
                         break;
                     case 2:
                         exit = 1;
-                        /*fare la free degli array*/
+
+                        free(x_plot);
+                        free(polynomial_to_plot_chebyshev);
+                        free(err_to_plot_chebyshev);
+                        free(coefficients_chebyshev);
+                        free(polynomial_chebyshev);
+                        free(result_chebyshev);
                         break;
                 }
 
                 break;
 
             case 3:
-                system("clear");
-                printf("Menu' 3");
+                comparation_methods();
+                scanf("%u", &choice);
+                getchar();
+
+                while(choice < 1 || choice > 2){
+                    printf(BOLD RED "\nERRORE! " RESET);
+                    printf("Premere invio per riprovare...");
+                    getchar();
+                    fflush(stdin);
+                    comparation_methods();
+                    scanf("%u", &choice);
+                    getchar();
+
+                    free(x_plot);
+                    free(polynomial);
+                    free(err);
+                    free(polynomial_to_plot);
+                    free(err_to_plot);
+                    free(coefficients_chebyshev);
+                    free(polynomial_chebyshev);
+                    free(result_chebyshev);
+                }
+
+                switch(choice){
+                    case 1:
+                        exit = 2;
+
+                        free(x_plot);
+                        free(polynomial);
+                        free(err);
+                        free(polynomial_to_plot);
+                        free(err_to_plot);
+                        free(coefficients_chebyshev);
+                        free(polynomial_chebyshev);
+                        free(result_chebyshev);
+                        break;
+                    case 2:
+                        exit = 1;
+
+                        free(x_plot);
+                        free(polynomial);
+                        free(err);
+                        free(polynomial_to_plot);
+                        free(err_to_plot);
+                        free(coefficients_chebyshev);
+                        free(polynomial_chebyshev);
+                        free(result_chebyshev);
+                        break;
+                }
+
                 break;
 
             case 4:
@@ -126,9 +204,7 @@ int main(void){
 }
 
 /**
- * 
  * @brief Funzione che utilizzo per la stampa del menù
- * 
  */
 void main_menu(){
 
@@ -141,13 +217,11 @@ void main_menu(){
     printf("3) Confronto tra i due metodi di interpolazione\n");
     printf("4) Esci\n\n");
 
-    printf("La mia scelta e' la numero: ");
+    printf("La mia scelta è la numero: ");
 }
 
 /**
- * 
  * @brief Funzione con la quale vado a stampare i risultati ottenuti con il metodo di Lagrange 
- * 
  */
 void lagrange_polynomial(){
 
@@ -155,47 +229,67 @@ void lagrange_polynomial(){
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI LAGRANGE\n\n");
 
-
-    x_plot = divide_interval(LOWER_BOUND, UPPER_BOUND, STEPS);  /*Divido l'intervallo [0-6] in 1000 parti per 
-                                                                  avere una buona precisione */
-    
-    polynomial = polyfit(calculate_value_function, x_node, GRADE);
+    printf("X_NODE     [");
     for(i = 0; i <= GRADE; i++){
-        printf("product[%d] = %.4f\n", i, polynomial[i]);
-    }
-
-
-    /*
-    int i;
-    
-    node_lagrange(x_node_lagrange, y_node_lagrange);
-    poly_lagrange = polynomial_lagrange(x_val_lagrange, x_node_lagrange);
-
-    separator = "";
-    printf("POLYNOMIAL {");
-    for(i = 0; i < GRADE + 1; i++){
-        printf("%s%.4f", separator, poly_lagrange[i]);
+        x_node[i] = i;
+        printf("%s%.4f", separator, x_node[i]);
         separator = ", ";
     }
-    printf("}\n");
+    printf("]\n");
 
 
+    for(i = 0; i <= GRADE; i++) y_node[i] = calculate_value_function(i);
     
-
-    err_lagrange = error_lagrange(x_val_lagrange, poly_lagrange);
-
     separator = "";
-	printf("ERROR      {");
+    printf("X_VALUE    [");
 	for(i = 0; i < GRADE; i++){
-        printf("%s%.4f", separator, err_lagrange[i]);
+		x_val[i] = (x_node[i] + x_node[i + 1]) / 2;
+		printf("%s%.4f", separator, x_val[i]);
+        separator = ", ";
+	}
+	printf("]\n");
+
+
+    separator = "";
+    printf("Y_VALUE    [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, calculate_value_function(x_val[i]));
+        separator = ", ";
+	}
+	printf("]\n");
+
+    polynomial = polyval(x_val, x_node, y_node, GRADE, GRADE);
+
+    separator = "";
+    printf("POLYNOMIAL [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, polynomial[i]);
         separator = ", ";
     }
-	printf("}\n"); */
+	printf("]\n");
 
-    printf("\n1) Torna al menu' precedente\n");
+    err = interpolation_error(x_val, polynomial, GRADE);
+
+    separator = "";
+    printf("ERROR      [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, err[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+    /* Per plottare espando l'intervallo [0, 6] in 1000 parti uguali */
+    x_plot = divide_interval(LOWER_BOUND, UPPER_BOUND, STEPS_PLOT);
+
+    for(i = 0; i < STEPS_PLOT; i++) y_plot[i] = calculate_value_function(x_plot[i]);
+    
+    polynomial_to_plot = polyval(x_plot, x_node, y_node, GRADE, STEPS_PLOT); 
+    err_to_plot = interpolation_error(x_plot, polynomial_to_plot, STEPS_PLOT);
+
+    printf("\n1) Torna al menù precedente\n");
     printf("2) Esci\n\n");
 
-    printf("La mia scelta e' la numero: ");
+    printf("La mia scelta è la numero: ");
 } 
 
 void chebyshev_polynomial(){
@@ -204,10 +298,163 @@ void chebyshev_polynomial(){
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI CHEBYSHEV\n\n");
 
-    /*node_succession_lagrange(x_node_lagrange, y_node_lagrange, x_val_lagrange); */
-/*
-    printf("\n1) Torna al menu' precedente\n");
+    separator = "";
+    printf("X_NODE       [");
+    for(i = 0; i <= GRADE; i++){
+        x_node[i] = i;
+        printf("%s%.4f", separator, x_node[i]);
+        separator = ", ";
+    }
+    printf("]\n");    
+
+    separator = "";
+    printf("X_VALUE      [");
+	for(i = 0; i < GRADE; i++){
+		x_val[i] = (x_node[i] + x_node[i + 1]) / 2;
+		printf("%s%.4f", separator, x_val[i]);
+        separator = ", ";
+	}
+	printf("]\n");
+
+    separator = "";
+    printf("Y_VALUE      [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, calculate_value_function(x_val[i]));
+        separator = ", ";
+	}
+	printf("]\n");
+
+    coefficients_chebyshev = chebyshev_coefficients(calculate_value_function, LOWER_BOUND, UPPER_BOUND, GRADE);
+
+    separator = "";
+    printf("COEFFICIENTS [");
+    for(i = 0; i < GRADE; i++){
+        printf("%s%.4f", separator, coefficients_chebyshev[i]);
+        separator = ", ";
+    }
+    printf("]\n");
+
+    result_chebyshev = chebyshev_polyval(x_val, coefficients_chebyshev, LOWER_BOUND, UPPER_BOUND, GRADE, GRADE);
+    
+    separator = "";
+    printf("POLYNOMIAL   [");
+    for(i = 0; i < GRADE; i++){
+        printf("%s%.4f", separator, result_chebyshev[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+    err = interpolation_error(x_val, result_chebyshev, GRADE);
+
+    separator = "";
+    printf("ERROR        [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, err[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+    /* Per plottare espando l'intervallo [0, 6] in 1000 parti uguali */
+    x_plot = divide_interval(LOWER_BOUND, UPPER_BOUND, STEPS_PLOT);
+
+    for(i = 0; i < STEPS_PLOT; i++) y_plot[i] = calculate_value_function(x_plot[i]);
+    
+    polynomial_to_plot_chebyshev = chebyshev_polyval(x_plot, coefficients_chebyshev, LOWER_BOUND, UPPER_BOUND, GRADE, STEPS_PLOT); 
+    err_to_plot_chebyshev = interpolation_error(x_plot, polynomial_to_plot, STEPS_PLOT);
+
+    
+    printf("\n1) Torna al menù precedente\n");
     printf("2) Esci\n\n");
 
-    printf("La mia scelta e' la numero: ");*/
+    printf("La mia scelta è la numero: ");
 } 
+
+void comparation_methods(){
+
+    system("clear");
+    
+    printf("\nCONFRONTE DEI DUE METODI DI INTERPOLAZIONE\n\n");    
+
+    printf("- Polinomio di Lagrange: \n\n");
+
+    for(i = 0; i <= GRADE; i++){
+        x_node[i] = i;
+        y_node[i] = calculate_value_function(i);    
+    }
+
+	for(i = 0; i < GRADE; i++) x_val[i] = (x_node[i] + x_node[i + 1]) / 2;
+    
+    polynomial = polyval(x_val, x_node, y_node, GRADE, GRADE);
+    err = interpolation_error(x_val, polynomial, GRADE);
+
+    separator = "";
+    printf("  Y_VALUE    [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, calculate_value_function(x_val[i]));
+        separator = ", ";
+	}
+	printf("]\n");
+
+    separator = "";
+    printf("  POLYNOMIAL [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, polynomial[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+    separator = "";
+    printf("  ERROR      [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, err[i]);
+        separator = ", ";
+    }
+	printf("]\n\n\n");
+
+    printf("- Polinomio di Chebyshev: \n\n");
+
+    coefficients_chebyshev = chebyshev_coefficients(calculate_value_function, LOWER_BOUND, UPPER_BOUND, GRADE);
+    result_chebyshev = chebyshev_polyval(x_val, coefficients_chebyshev, LOWER_BOUND, UPPER_BOUND, GRADE, GRADE);
+    err = interpolation_error(x_val, result_chebyshev, GRADE);
+
+    separator = "";
+    printf("  Y_VALUE    [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, calculate_value_function(x_val[i]));
+        separator = ", ";
+	}
+	printf("]\n");
+
+    separator = "";
+    printf("  POLYNOMIAL [");
+    for(i = 0; i < GRADE; i++){
+        printf("%s%.4f", separator, result_chebyshev[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+    separator = "";
+    printf("  ERROR      [");
+	for(i = 0; i < GRADE; i++){
+		printf("%s%.4f", separator, err[i]);
+        separator = ", ";
+    }
+	printf("]\n");
+
+
+    /* Ora vado ad espandare l'intervallo e plotto i due metodi di interpolazione */
+    x_plot = divide_interval(LOWER_BOUND, UPPER_BOUND, STEPS_PLOT);
+
+    for(i = 0; i < STEPS_PLOT; i++) y_plot[i] = calculate_value_function(x_plot[i]);
+
+
+    polynomial_to_plot = polyval(x_plot, x_node, y_node, GRADE, STEPS_PLOT); 
+    polynomial_to_plot_chebyshev = chebyshev_polyval(x_plot, coefficients_chebyshev, LOWER_BOUND, UPPER_BOUND, GRADE, STEPS_PLOT); 
+
+    print_comparison_graph(x_plot, y_plot, polynomial_to_plot, polynomial_to_plot_chebyshev, STEPS_PLOT, COMMANDS);
+
+    printf("\n1) Torna al menù precedente\n");
+    printf("2) Esci\n\n");
+
+    printf("La mia scelta è la numero: ");
+}

@@ -1,8 +1,6 @@
 #ifndef LAGRANGE_H
-/*#define LAGRANGE_H*/
 
-static double calculate_value_function(double x_node);
-static double* divide_interval(double lower, double higher, double step);
-static double* polyfit(double function(double), double* x_node, const int grade);
+double* polyval(double *x_val, double *x_node, double *y_node, int grade, int step);
+void plot_graph(double *x_node, double *y_node, double *poly, double *err, int grade, int commands);
 
 #endif /* LAGRANGE_H */
