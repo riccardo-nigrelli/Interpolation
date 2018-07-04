@@ -54,9 +54,18 @@ double* interpolation_error(double *x_val, double *result, int grade){
 	return error;
 }
 
+/**
+ * @brief   Funzione per plottare i grafici a confronto 
+ * @param   Array contenente i valori delle ascisse della funzione
+ * @param   Array contenente i valori delle ordinate della funzione
+ * @param   Array contenente i valori del polinomio di Lagrange
+ * @param   Array contenente i valori del polinomio di Chebyshev
+ * @param   Il grado del polinomio
+ * @param   Il numero di comandi per gnuplot
+ */ 
 void print_comparison_graph(double *x_node, double *y_node, double *poly_lagrange, double *poly_chebyshev, int grade, int commands){
     
-    char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI CHEBYSHEV\"", "plot 'resources/function.txt' title 'Reale' with lines, 'resources/chebyshev.txt' title 'Chebyshev' with lines, 'resources/lagrange.txt' title 'Lagrange' with lines"};
+    char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot 'resources/function.txt' title 'Reale' with lines, 'resources/chebyshev.txt' title 'Chebyshev' with lines, 'resources/lagrange.txt' title 'Lagrange' with lines"};
 
     FILE *file  = fopen("resources/function.txt", "w");
     FILE *file1 = fopen("resources/chebyshev.txt", "w");
