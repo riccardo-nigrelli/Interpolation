@@ -19,6 +19,10 @@ int i, j;
 double* chebyshev_coefficients(double function(double), double lower_bound, double upper_bound, int grade){
 
     double x, y, *coefficients = malloc(grade * sizeof(double));
+    if (coefficients == NULL){
+        perror("Errore nell'allocazione della memoria\n");
+        abort();
+    }
 
     for(i = 0; i < grade; i++){
         coefficients[i] = 0.0;

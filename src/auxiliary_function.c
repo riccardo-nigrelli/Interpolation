@@ -47,6 +47,10 @@ double calculate_value_function(double x_node){
 double* interpolation_error(double *x_val, double *result, int grade){
 
 	double *error = malloc(grade * sizeof(double));
+    if (error == NULL){
+        perror("Errore nell'allocazione della memoria\n");
+        abort();
+    }
 
 	for (i = 0; i < grade; i++)
 		error[i] = fabs(((log(x_val[i] + 1)) + cos(x_val[i] - 1)) - result[i]);
@@ -82,7 +86,7 @@ void print_comparison_graph(double *x_node, double *y_node, double *poly_lagrang
         abort();
     }
 
-    for(i = 0; i < grade; i++)  fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
+    for(i = 0; i < grade; i++)    fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
     for(i = 0; i < grade; i++)   fprintf(file1, "%.4f %.4f\n", x_node[i], poly_lagrange[i]);
     for(i = 0; i < grade; i++)   fprintf(file2, "%.4f %.4f\n", x_node[i], poly_chebyshev[i]);
 
