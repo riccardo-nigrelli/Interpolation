@@ -45,7 +45,12 @@ double* chebyshev_coefficients(double function(double), double lower_bound, doub
  */ 
 double* chebyshev_polyval(double *x_value, double *coefficients, double lower_bound, double upper_bound, int grade, int steps){
 
-    double *y = malloc(steps * sizeof(double)), *result = malloc(steps * sizeof(double));
+    double *y = (double *) malloc(steps * sizeof(double)), *result = (double *) malloc(steps * sizeof(double));
+    if(y == NULL || result == NULL){
+        perror("Errore nell'allocazione della memoria\n");
+        abort();
+    }
+    
     for (i = 0; i < steps; i++)
         y[i] = (2 * x_value[i] - (upper_bound + lower_bound))/(upper_bound - lower_bound);
     
