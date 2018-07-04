@@ -72,11 +72,11 @@ double* chebyshev_polyval(double *x_value, double *coefficients, double lower_bo
  */ 
 void plot_graph_chebyshev(double *x_node, double *y_node, double *poly, double *err, int grade, int commands){
 
-    char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI CHEBYSHEV\"", "plot 'Resources/function.txt' title 'Reale' with lines, 'Resources/chebyshev.txt' title 'Interpolata' with lines, 'Resources/error_chebyshev.txt' title 'Errore' with lines"};
+    char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI CHEBYSHEV\"", "plot 'resources/function.txt' title 'Reale' with lines, 'resources/chebyshev.txt' title 'Interpolata' with lines, 'resources/error_chebyshev.txt' title 'Errore' with lines"};
 
-    FILE *file  = fopen("Resources/function.txt", "w");
-    FILE *file1 = fopen("Resources/chebyshev.txt", "w");
-    FILE *file2 = fopen("Resources/error_chebyshev.txt", "w");
+    FILE *file  = fopen("resources/function.txt", "w");
+    FILE *file1 = fopen("resources/chebyshev.txt", "w");
+    FILE *file2 = fopen("resources/error_chebyshev.txt", "w");
     FILE *pipe  = popen("gnuplot -p", "w");
 
     if(file == NULL || file1 == NULL || file2 == NULL){
