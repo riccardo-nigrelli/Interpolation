@@ -213,7 +213,7 @@ void main_menu(){
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        system("clc");
+        system("cls");
     #endif
     
     printf("PROGRAMMA PER L'INTERPOLAZIONE DELLA FUNZIONE ln(x + 1) + cos(x - 1)\n\n");
@@ -237,7 +237,7 @@ void lagrange_polynomial(){
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        system("clc");
+        system("cls");
     #endif
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI LAGRANGE\n\n");
@@ -312,7 +312,7 @@ void chebyshev_polynomial(){
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        system("clc");
+        system("cls");
     #endif
     
     printf("\nINTERPOLAZIONE CON IL POLINOMIO DI CHEBYSHEV\n\n");
@@ -395,7 +395,7 @@ void comparation_methods(){
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        system("clc");
+        system("cls");
     #endif
     
     printf("\nCONFRONTE DEI DUE METODI DI INTERPOLAZIONE\n\n");    
