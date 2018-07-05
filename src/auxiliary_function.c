@@ -69,11 +69,23 @@ double* interpolation_error(double *x_val, double *result, int grade){
  */ 
 void print_comparison_graph(double *x_node, double *y_node, double *poly_lagrange, double *poly_chebyshev, int grade, int commands){
     
-    char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot 'resources/function.txt' title 'Reale' with lines, 'resources/chebyshev.txt' title 'Chebyshev' with lines, 'resources/lagrange.txt' title 'Lagrange' with lines"};
+    #if defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot 'resources/function.txt' title 'Reale' with lines, 'resources/chebyshev.txt' title 'Chebyshev' with lines, 'resources/lagrange.txt' title 'Lagrange' with lines"};
 
-    FILE *file  = fopen("resources/function.txt", "w");
-    FILE *file1 = fopen("resources/chebyshev.txt", "w");
-    FILE *file2 = fopen("resources/lagrange.txt", "w");
+        FILE *file  = fopen("resources/function.txt", "w");
+        FILE *file1 = fopen("resources/chebyshev.txt", "w");
+        FILE *file2 = fopen("resources/lagrange.txt", "w");
+    #endif
+    
+    #if defined(_WIN32) || defined(_WIN36)
+        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot 'resources\\function.txt' title 'Reale' with lines, 'resources\\chebyshev.txt' title 'Chebyshev' with lines, 'resources\\lagrange.txt' title 'Lagrange' with lines"};
+
+        FILE *file  = fopen("resources\\function.txt", "w");
+        FILE *file1 = fopen("resources\\chebyshev.txt", "w");
+        FILE *file2 = fopen("resources\\lagrange.txt", "w");
+    #endif
+
+    
     FILE *pipe  = popen("gnuplot -p", "w");
 
     if(file == NULL || file1 == NULL || file2 == NULL){
