@@ -58,9 +58,9 @@ void plot_graph(double *x_node, double *y_node, double *poly, double *err, int g
     #if defined(_WIN32) || defined(_WIN36)
         char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI LAGRANGE\"", "plot 'resources\\function.txt' title 'Reale' with lines, 'resources\\lagrange.txt' title 'Interpolata' with lines, 'resources\\error_lagrange.txt' title 'Errore' with lines"};
 
-        FILE *file  = fopen("resources\\function.txt", "w");
-        FILE *file1 = fopen("resources\\lagrange.txt", "w");
-        FILE *file2 = fopen("resources\\error_lagrange.txt", "w");
+        FILE *file  = fopen("resources\function.txt", "w");
+        FILE *file1 = fopen("resources\lagrange.txt", "w");
+        FILE *file2 = fopen("resources\error_lagrange.txt", "w");
     #endif
 
     FILE *pipe  = popen("gnuplot -p", "w");
