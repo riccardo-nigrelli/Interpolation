@@ -46,7 +46,7 @@ double calculate_value_function(double x_node){
  */ 
 double* interpolation_error(double *x_val, double *result, int grade){
 
-	double *error = malloc(grade * sizeof(double));
+	double *error = calloc(grade, sizeof(double));
     if (error == NULL){
         perror("Errore nell'allocazione della memoria\n");
         abort();
@@ -78,13 +78,12 @@ void print_comparison_graph(double *x_node, double *y_node, double *poly_lagrang
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot 'resources\\function.txt' title 'Reale' with lines, 'resources\\chebyshev.txt' title 'Chebyshev' with lines, 'resources\\lagrange.txt' title 'Lagrange' with lines"};
+        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1)\"", "plot '..\\resources\\function.txt' title 'Reale' with lines, '..\\resources\\chebyshev.txt' title 'Chebyshev' with lines, '..\\resources\\lagrange.txt' title 'Lagrange' with lines"};
 
-        FILE *file  = fopen("resources\\function.txt", "w");
-        FILE *file1 = fopen("resources\\chebyshev.txt", "w");
-        FILE *file2 = fopen("resources\\lagrange.txt", "w");
+        FILE *file  = fopen("..\\resources\\function.txt", "w");
+        FILE *file1 = fopen("..\\resources\\chebyshev.txt", "w");
+        FILE *file2 = fopen("..\\resources\\lagrange.txt", "w");
     #endif
-
     
     FILE *pipe  = popen("gnuplot -p", "w");
 
@@ -98,7 +97,7 @@ void print_comparison_graph(double *x_node, double *y_node, double *poly_lagrang
         abort();
     }
 
-    for(i = 0; i < grade; i++)    fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
+    for(i = 0; i < grade; i++)   fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
     for(i = 0; i < grade; i++)   fprintf(file1, "%.4f %.4f\n", x_node[i], poly_lagrange[i]);
     for(i = 0; i < grade; i++)   fprintf(file2, "%.4f %.4f\n", x_node[i], poly_chebyshev[i]);
 

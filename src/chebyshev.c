@@ -55,10 +55,10 @@ double* chebyshev_polyval(double *x_value, double *coefficients, double lower_bo
         abort();
     }
     
-    for (i = 0; i < steps; i++)
-        y[i] = (2 * x_value[i] - (upper_bound + lower_bound))/(upper_bound - lower_bound);
+    for (i = 0; i < steps; i++) y[i] = (2 * x_value[i] - (upper_bound + lower_bound))/(upper_bound - lower_bound);
     
     for (i = 0; i < steps; i++){ 
+        result[i] = 0.0;
         for (j = 0; j < grade; j++)
             result[i] += coefficients[j] * cos(j * acos(y[i]));
     }
@@ -109,7 +109,7 @@ void plot_graph_chebyshev(double *x_node, double *y_node, double *poly, double *
         abort();
     }
 
-    for(i = 0; i < grade; i++)  fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
+    for(i = 0; i < grade; i++)   fprintf(file, "%.4f %.4f\n", x_node[i], y_node[i]);
     for(i = 0; i < grade; i++)   fprintf(file1, "%.4f %.4f\n", x_node[i], poly[i]);
     for(i = 0; i < grade; i++)   fprintf(file2, "%.4f %.4f\n", x_node[i], err[i]);
 
