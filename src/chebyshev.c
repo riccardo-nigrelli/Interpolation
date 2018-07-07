@@ -90,11 +90,11 @@ void plot_graph_chebyshev(double *x_node, double *y_node, double *poly, double *
     #endif
     
     #if defined(_WIN32) || defined(_WIN36)
-        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI CHEBYSHEV\"", "plot 'resources\\function.txt' title 'Reale' with lines, 'resources\\chebyshev.txt' title 'Interpolata' with lines, 'resources\\error_chebyshev.txt' title 'Errore' with lines"};
+        char *gnuplot_commands[] = {"set title \"INTERPOLAZIONE DI ln(x+1) + cos(x-1) TRAMITE POLINOMIO DI CHEBYSHEV\"", "plot '..\\resources\\function.txt' title 'Reale' with lines, '..\\resources\\chebyshev.txt' title 'Interpolata' with lines, '..\\resources\\error_chebyshev.txt' title 'Errore' with lines"};
 
-        FILE *file  = fopen("resources\\function.txt", "w");
-        FILE *file1 = fopen("resources\\chebyshev.txt", "w");
-        FILE *file2 = fopen("resources\\error_chebyshev.txt", "w");
+        FILE *file  = fopen("..\\resources\\function.txt", "w");
+        FILE *file1 = fopen("..\\resources\\chebyshev.txt", "w");
+        FILE *file2 = fopen("..\\resources\\error_chebyshev.txt", "w");
     #endif
 
     FILE *pipe  = popen("gnuplot -p", "w");
