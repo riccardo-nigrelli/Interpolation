@@ -12,7 +12,7 @@
 Attraverso questo package do la possibilità all'utente di interpolare la funzione `ln(x + 1) + cos(x - 1)` attraverso il polinomio di Lagrange e il polinomio di Chebyshev con rappresentazione grafica di entrambi i metodi. Inoltre è possibile mettere a confronto i risultati delle due interpolazioni in un un unico grafico in modo da vedere quale tra i due metodi approssima meglio la funzione di partenza.
 
 <h4> Pre-requisiti </h4>
-Per l'utilizzo di questo tool è necessario aver installato <code>gnuplot</code>
+Per l'utilizzo di questo tool è necessario aver installato [gnuplot](http://www.gnuplot.info/)
 
 <h4> Comandi di utilizzo </h4>
 <table>
