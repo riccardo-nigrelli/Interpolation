@@ -158,48 +158,40 @@ int main(void){
                     scanf("%u", &choice);
                     getchar();
 
-                    free(x_plot);
                     free(polynomial);
                     free(err);
-                    free(polynomial_to_plot);
-                    free(err_to_plot);
-                    free(polynomial_to_plot_chebyshev);
-                    free(err_to_plot_chebyshev);
                     free(coefficients_chebyshev);
-                    free(polynomial_chebyshev);
                     free(result_chebyshev);
+                    free(err_chebyshev);
+                    free(x_plot);
+                    free(polynomial_to_plot);
+                    free(polynomial_to_plot_chebyshev);
                 }
 
                 switch(choice){
                     case 1:
                         exit = 2;
 
-                        free(x_plot);
                         free(polynomial);
                         free(err);
-                        free(err_chebyshev);
-                        free(polynomial_to_plot);
-                        free(err_to_plot);
-                        free(polynomial_to_plot_chebyshev);
-                        free(err_to_plot_chebyshev);
                         free(coefficients_chebyshev);
-                        free(polynomial_chebyshev);
                         free(result_chebyshev);
+                        free(err_chebyshev);
+                        free(x_plot);
+                        free(polynomial_to_plot);
+                        free(polynomial_to_plot_chebyshev);
                         break;
                     case 2:
                         exit = 1;
 
-                        free(x_plot);
                         free(polynomial);
                         free(err);
-                        free(err_chebyshev);
-                        free(polynomial_to_plot);
-                        free(err_to_plot);
-                        free(polynomial_to_plot_chebyshev);
-                        free(err_to_plot_chebyshev);
                         free(coefficients_chebyshev);
-                        free(polynomial_chebyshev);
                         free(result_chebyshev);
+                        free(err_chebyshev);
+                        free(x_plot);
+                        free(polynomial_to_plot);
+                        free(polynomial_to_plot_chebyshev);
                         break;
                 }
 
