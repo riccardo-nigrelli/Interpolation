@@ -30,4 +30,4 @@ Per l'utilizzo di questo tool è necessario aver installato [gnuplot].
   </tr>
 </table>
 
-[gnuplot]: (http://www.gnuplot.info/)
+[gnuplot]: http://www.gnuplot.info/
