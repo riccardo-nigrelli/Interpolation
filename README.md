@@ -1,4 +1,4 @@
-﻿<h2 align="center"> PACKAGE PER L'INTERPOLAZIONE DELLA FUNZIONE ln(x + 1) + cos(x - 1) </h2>
+﻿<h2 align="center"> PACKAGE FOR INTERPOLATION OF ln(x + 1) + cos(x - 1) FUNCTION</h2>
 
 <p align="center">
   <a href="">
@@ -9,23 +9,23 @@
   </a>
 </p>
 
-Attraverso questo package do la possibilità all'utente di interpolare la funzione `ln(x + 1) + cos(x - 1)` attraverso il polinomio di Lagrange e il polinomio di Chebyshev con rappresentazione grafica di entrambi i metodi. Inoltre è possibile mettere a confronto i risultati delle due interpolazioni in un un unico grafico in modo da vedere quale tra i due metodi approssima meglio la funzione di partenza.
+Through this package I give the user the possibility to interpolate the function `ln (x + 1) + cos (x - 1)` through the Lagrange polynomial and the Chebyshev polynomial with graphic representation of both methods. Furthermore, it is possible to compare the results of the two interpolations in a single graph in order to see which of the two methods best approximates the starting function.
 
-<h4> Pre-requisiti </h4>
-Per l'utilizzo di questo tool è necessario aver installato <a href="http://www.gnuplot.info/">gnuplot</a>.
+<h4> Prerequisites </h4>
+To use this tool you need to have <a href="http://www.gnuplot.info/"> gnuplot </a> and git installed.
 
-<h4> Comandi di utilizzo </h4>
+<h4> Usage commands </h4>
 <table>
   <tr align="left">
-    <th>Comando</th>
-    <th>Descrizione</th>
+    <th>Command</th>
+    <th>Description</th>
   </tr>
   <tr>
     <td><code>make clean all</code></td>
-    <td>Generare i file eseguibili</td>
+    <td>Generate executable files</td>
   </tr>
   <tr>
     <td><code>./app/main</code></td>
-    <td>Eseguire l'applicativo</td>
+    <td>Run the application</td>
   </tr>
 </table>
